@@ -12,18 +12,39 @@ import gspread
 import os
 from oauth2client.service_account import ServiceAccountCredentials
 from rest_framework.decorators import api_view
+# Custom for using env
+import environ
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
 
-# Get directory path
-DIRNAME = os.path.dirname(__file__)
-# Scope of connection to google sheets
-scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
-         "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
-# Connect to google sheets using credentials from json
-creds = ServiceAccountCredentials.from_json_keyfile_name(os.path.join(DIRNAME, "creds.json"), scope)
-# Authorize connection
-client = gspread.authorize(creds)
+def local_google_connection():
+    # Get directory path
+    DIRNAME = os.path.dirname(__file__)
+    # Scope of connection to google sheets
+    scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
+             "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
+    # Connect to google sheets using credentials from json
+    creds = ServiceAccountCredentials.from_json_keyfile_name(os.path.join(DIRNAME, "creds.json"), scope)
+    # Authorize connection
+    client = gspread.authorize(creds)
+    return client
+
+def heroku_googl_connection():
+    # Get directory path
+    # Scope of connection to google sheets
+    scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
+             "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
+    credentials_json = env('GOOGLE_APPLICATION_CREDENTIALS')
+
+    # Connect to google sheets using credentials from json
+    creds = ServiceAccountCredentials.from_json_keyfile_name(credentials_json, scope)
+    # Authorize connection
+    client = gspread.authorize(creds)
+    return client
 
 def connect_to_gsheet(gsheet):
+    client = heroku_googl_connection()
     if gsheet == "Russ":
         # Google sheet name and the specific sheet name selected
         sheet = client.open("Russ Time Series").worksheet("rawData")  # Open the spreadsheet
