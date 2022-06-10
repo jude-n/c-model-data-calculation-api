@@ -18,17 +18,17 @@ import environ
 env = environ.Env()
 environ.Env.read_env()
 
-def local_google_connection():
-    # Get directory path
-    DIRNAME = os.path.dirname(__file__)
-    # Scope of connection to google sheets
-    scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
-             "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
-    # Connect to google sheets using credentials from json
-    creds = ServiceAccountCredentials.from_json_keyfile_name(os.path.join(DIRNAME, "creds.json"), scope)
-    # Authorize connection
-    client = gspread.authorize(creds)
-    return client
+# def local_google_connection():
+#     # Get directory path
+#     DIRNAME = os.path.dirname(__file__)
+#     # Scope of connection to google sheets
+#     scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
+#              "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
+#     # Connect to google sheets using credentials from json
+#     creds = ServiceAccountCredentials.from_json_keyfile_name(os.path.join(DIRNAME, "creds.json"), scope)
+#     # Authorize connection
+#     client = gspread.authorize(creds)
+#     return client
 
 def heroku_googl_connection():
     # Get directory path
