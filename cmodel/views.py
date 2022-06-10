@@ -9,7 +9,6 @@ import matplotlib.pyplot as plt
 import datetime as dt
 from dateutil.relativedelta import relativedelta
 import gspread
-import os
 from oauth2client.service_account import ServiceAccountCredentials
 from rest_framework.decorators import api_view
 # Custom for using env
