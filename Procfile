@@ -1,3 +1,3 @@
 
-web: gunicorn cmodel.wsgi
+worker: gunicorn cmodel.wsgi
 
