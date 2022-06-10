@@ -1,3 +1,3 @@
 
-web:gunicorn cmodel:application --log-file -
+web gunicorn cmodel:wsgi --log-file -
 
