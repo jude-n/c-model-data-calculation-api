@@ -179,6 +179,15 @@ def merge_data_with_forecast_months(future_months, forecast_data):
     # merged_forecast = merged_forecast.loc[:, merged_forecast.columns != 'month']
     merged_forecast['year'] = pd.to_datetime(merged_forecast['Forecast Month']).dt.year
     return merged_forecast
+
+def creating_columns_for_graph(graph_data):
+    columns = []
+    graph_columns = {}
+    for key, value in graph_data['data'][0].items():
+        column_object = {"name": key, 'label': key, "options": {"filter": True, "sort": True}}
+        columns.append(column_object)
+    graph_data['columns'] = columns
+    return graph_data
     # merged_forecast.head()
 # Required columns for targets model calculation
 required_columns_for_model = ["Group Name", 'Opportunity Owner', 'Opportunity Name', 'Created Date', 'Close Date',
@@ -229,8 +238,9 @@ def run_targets(request):
     initial_forecast = add_desired_growth_to_forecast(median_data, request.GET["growth"], mean_data)
     merged_forecasted_data = merge_data_with_forecast_months(forecasted_months, initial_forecast)
     graph_data = format_data_into_graph_structure(merged_forecasted_data, product)
+    mapped_graph_data = creating_columns_for_graph(graph_data)
     # return JsonResponse(json.dump(graph_data), safe=False)
-    return Response(graph_data)
+    return Response(mapped_graph_data)
 # for v2 file will be s3 path for now:
 # read file
 # get necessary variables
