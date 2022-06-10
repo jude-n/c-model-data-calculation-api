@@ -1,3 +1,3 @@
 
-web: gunicorn c-model-data-calculation-api.cmodel.wsgi
+web: python manage.py runserver
 
