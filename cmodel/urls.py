@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from rest_framework.urlpatterns import format_suffix_patterns #get json esponse in browser
+from cmodel import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('targets/', views.run_targets),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
