@@ -20,7 +20,7 @@ from cmodel import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('targets/', views.run_targets),
+    path('targets', views.run_targets),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
