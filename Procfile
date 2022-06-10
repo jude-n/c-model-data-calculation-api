@@ -1,3 +1,3 @@
 
-worker: gunicorn c-model-data-calculation-api.cmodel.wsgi
+web: gunicorn c-model-data-calculation-api.cmodel.wsgi
 
