@@ -132,3 +132,5 @@ dmypy.json
 # Custom
 .idea
 .env
+creds.json
+backup_views.py

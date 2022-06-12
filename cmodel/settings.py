@@ -33,7 +33,8 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = [
-'c-model-computation-api.herokuapp.com'
+    # '*'
+'c-model-computation-api.herokuapp.com',
 ]
 
 # CORS_ALLOWED_ORIGINS = [
